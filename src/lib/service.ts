@@ -33,7 +33,25 @@ const handleError = (error: any, defaultMessage: string) => {
 };
 
 export const fetchPostData = async () => {
-  const response = await fetch(`${API_BASE_URL}/api/articles?populate=*`, {
+  const response = await fetch(`${API_BASE_URL}/articles?populate=*`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${API_TOKEN}`,
+    },
+  });
+
+  if (!response.ok) {
+    const errText = await response.text();
+    console.error("RESPONSE ERROR:", errText);
+    throw new Error("Failed to fetch article data");
+  }
+
+  return await response.json();
+};
+
+export const fetchPostDataById = async (documentId: string) => {
+  const response = await fetch(`${API_BASE_URL}/articles/${documentId}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
