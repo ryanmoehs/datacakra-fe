@@ -4,7 +4,7 @@ import { Heart } from "lucide-react";
 import React from "react";
 
 const PostDetail = () => {
-  titleChange("Post Detail - TravelApp");
+  titleChange(` - TravelApp`);
   return (
     <div className="w-full">
       <div className="relative w-full h-90 p-0">
